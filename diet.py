@@ -599,8 +599,8 @@ class psfexptime:
   def exptime_compute(self):
     import scipy.optimize as so
     t = so.brentq(self.snrdiff,self.tmin,self.tmax)
-    #print('Pixel stddev due to sky       : %.1f ADU' % (np.sqrt(self.ps.Stot_ADU / self.ps.gain)))
-    #print('Pixel stddev due to read-noise: %.1f ADU' % (self.ps.nccd_ADU))
+    print('Pixel stddev due to sky       : %.1f ADU' % (np.sqrt(self.ps.Stot_ADU / self.ps.gain)))
+    print('Pixel stddev due to read-noise: %.1f ADU' % (self.ps.nccd_ADU))
     return t
 
 class galsnr:

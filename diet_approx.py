@@ -462,6 +462,14 @@ class psfsnr:
   def dMdy(self,xi,yi): #first derivative w.r.t. x
     return 2.*self.beta*(self.beta-1.)*self.fac**2/(nm.pi*self.alpha**4) * (yi-self.ys) * (1. + self.fac*( (xi-self.xs)**2 + (yi-self.ys)**2 )/self.alpha**2)**(-self.beta-1.)
 
+'''
+I thought there was a bug in this function -- the dimensions don't seem to make sense -- but now I believe it makes sense if you re-write it:
+
+v = (Stot_ADU * gain    # Poisson variance due to sky background, in (e-)^2
+    + (nccd_ADU * gain)**2      # Additional variance -- eg read-out noise, in (e-)^2
+    + (Poisson noise from the source))
+return v / gain**2    # Return variance in ADU**2.
+'''
   def sigma2pix(self,xi,yi):
     sigma2 = self.Stot_ADU/self.gain + self.nccd_ADU**2 + self.Ftot_ADU/self.gain*self.rpix**2*self.M(xi,yi)
     return sigma2
